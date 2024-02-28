@@ -3,7 +3,7 @@ import { FaRegPenToSquare } from "react-icons/fa6";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center py-10 gap-8">
+    <div className="flex justify-between items-center py-6 sm:py-10 gap-8">
       <a href="/" className="flex items-center">
         <Image src="/logo.svg" width={300} height={300} alt="logo" />
       </a>
