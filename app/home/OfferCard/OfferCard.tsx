@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FaShop } from "react-icons/fa6";
 import { HiExternalLink } from "react-icons/hi";
+import OfferBadge from "../OfferBadge/OfferBadge";
 
 const OfferCard = () => {
   return (
@@ -16,14 +17,12 @@ const OfferCard = () => {
       <div className="relative -mt-16 px-4">
         <div className="bg-white rounded-lg shadow-lg p-6">
           <HiExternalLink />
-          <div className="flex items-baseline -ml-1 justify-between">
-            <div className="bg-teal-200 text-teal-800 text-xs px-2 inline-block rounded-full uppercase font-semibold">
-              Freebie
-            </div>
+          <div className="flex items-baseline -ml-2 justify-between">
             <div className="ml-2 text-gray-600 uppercase text-xs font-semibold flex gap-1">
               <FaShop />
               Costa Coffee
             </div>
+            <OfferBadge type="freebie" />
           </div>
           <h4 className="text-xl font-semibold mt-1">Free Doughnut</h4>
           <ul>
