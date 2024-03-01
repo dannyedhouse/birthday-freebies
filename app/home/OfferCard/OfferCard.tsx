@@ -1,17 +1,25 @@
+import { urlFor } from "@/app/lib/sanity";
+import { offer } from "@/app/lib/types/offerInterface";
+import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { FaShop } from "react-icons/fa6";
 import { HiExternalLink } from "react-icons/hi";
 import OfferBadge from "../OfferBadge/OfferBadge";
 
-const OfferCard = () => {
+type Props = { data: offer };
+
+const OfferCard = (props: Props) => {
+  const offer = props.data;
+
   return (
     <div>
       <Image
-        src="/doughnuts.jpg"
+        src={urlFor(offer.image).url()}
         alt="placeholder image"
         width={500}
         height={500}
         className="w-full object-cover object-center rounded-lg shadow-md"
+        priority
       />
 
       <div className="relative -mt-16 px-4">
@@ -20,14 +28,12 @@ const OfferCard = () => {
           <div className="flex items-baseline -ml-2 justify-between">
             <div className="ml-2 text-gray-600 uppercase text-xs font-semibold flex gap-1">
               <FaShop />
-              Costa Coffee
+              {offer.retailer}
             </div>
-            <OfferBadge type="freebie" />
+            <OfferBadge tag={offer.tag} />
           </div>
-          <h4 className="text-xl font-semibold mt-1">Free Doughnut</h4>
-          <ul>
-            <li>Sign up to the Retailer Reward App</li>
-          </ul>
+          <h4 className="text-xl font-semibold mt-1">{offer.heading}</h4>
+          <PortableText value={offer.content} />
         </div>
       </div>
     </div>

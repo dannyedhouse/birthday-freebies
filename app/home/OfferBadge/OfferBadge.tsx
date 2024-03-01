@@ -1,25 +1,27 @@
+import { offerTags } from "@/app/lib/types/offerTags";
+
 interface OfferBadgeProps {
-  type: "freebie" | "discount" | "no-app" | "limited";
+  tag: offerTags;
 }
 
 const OfferBadge = (props: OfferBadgeProps) => {
-  let offerType, badgeClass;
+  let offerTag, badgeClass;
 
-  switch (props.type) {
+  switch (props.tag) {
     case "freebie":
-      offerType = "No app needed";
+      offerTag = "Freebie";
       badgeClass = "bg-teal-200";
       break;
     case "discount":
-      offerType = "Discount";
+      offerTag = "Discount";
       badgeClass = "bg-red-200";
       break;
     case "no-app":
-      offerType = "No app needed";
+      offerTag = "No app needed";
       badgeClass = "bg-cyan-200";
       break;
     case "limited":
-      offerType = "Limited time";
+      offerTag = "Limited time";
       badgeClass = "bg-amber-200";
       break;
   }
@@ -28,7 +30,7 @@ const OfferBadge = (props: OfferBadgeProps) => {
     <div
       className={`${badgeClass} text--800 text-xs px-2 inline-block rounded-full uppercase font-semibold`}
     >
-      {offerType}
+      {offerTag}
     </div>
   );
 };
