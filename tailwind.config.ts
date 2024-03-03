@@ -16,6 +16,7 @@ const config: Config = {
       colors: {
         primary: "#D9F2F9",
         yellow: "#F7FDD1",
+        red: "#f83c4c",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],

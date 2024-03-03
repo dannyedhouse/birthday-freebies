@@ -10,7 +10,8 @@ async function getData() {
       "currentSlug": slug.current,
       url,
       image,
-      content
+      content,
+      dealSummary,
   }`;
 
   const data = await client.fetch(query);

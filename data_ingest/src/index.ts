@@ -54,16 +54,26 @@ function getData(response) {
     const logoSrc: string = $(elem).find("img").attr("src");
     const deal: string = $(elem).find("p").text();
 
-    let dealParts: string[] = deal.split(
-      /Freebie:|How to claim your freebie:|T&Cs:/
-    );
+    let dealParts: string[];
+    let tag: string = "";
+
+    if (deal.includes("Freebie:")) {
+      dealParts = deal.split(/Freebie:|How to claim your freebie:|T&Cs:/);
+      tag = "freebie";
+    } else {
+      dealParts = deal.split(
+        /Discount:|How to claim your birthday discount:|T&Cs:/
+      );
+      tag = "discount";
+    }
+
     const heading: string = dealParts[1].replace(".", "");
     const title: string = retailer + " - " + heading;
     const dealSummary: string = dealParts[2];
     const dealTerms: string = dealParts[3];
     const _id: string = String(i);
     const _type: string = "deals";
-    const tag: string = "";
+
     const popularity: number = 0;
     deals.push({
       _id,
