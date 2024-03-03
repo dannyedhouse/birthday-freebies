@@ -13,16 +13,20 @@ export default {
       type: 'string',
       title: 'Display heading for the freebie/deal',
     },
-
     {
       name: 'image',
       type: 'image',
-      title: 'Image for the freebie/deal',
+      title: 'Stock Image for the freebie/deal',
     },
     {
       name: 'retailer',
       type: 'string',
       title: 'Retailer',
+    },
+    {
+      name: 'logo',
+      type: 'image',
+      title: 'Logo for the retailer',
     },
     {
       name: 'slug',
@@ -41,19 +45,28 @@ export default {
       },
     },
     {
-      name: 'content',
-      type: 'array',
-      title: 'Content',
-      of: [
-        {
-          type: 'block',
-        },
-      ],
+      name: 'dealSummary',
+      type: 'string',
+      title: 'Summary of the deal',
+    },
+    {
+      name: 'dealTerms',
+      type: 'string',
+      title: 'T&Cs for the deal',
     },
     {
       name: 'url',
       type: 'url',
       title: 'URL to freebie/deal',
+    },
+    {
+      name: 'popularity',
+      type: 'number',
+      title: 'Popularity/scale of the retailer (1-10)',
+      initialValue: 0,
+      options: {
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      },
     },
   ],
 }

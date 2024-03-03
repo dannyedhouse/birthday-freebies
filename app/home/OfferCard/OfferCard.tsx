@@ -1,6 +1,5 @@
 import { urlFor } from "@/app/lib/sanity";
 import { offer } from "@/app/lib/types/offerInterface";
-import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { FaShop } from "react-icons/fa6";
 import { HiExternalLink } from "react-icons/hi";
@@ -33,7 +32,7 @@ const OfferCard = (props: Props) => {
             <OfferBadge tag={offer.tag} />
           </div>
           <h4 className="text-xl font-semibold mt-1">{offer.heading}</h4>
-          <PortableText value={offer.content} />
+          {/* <PortableText value={offer.content} /> */}
         </div>
       </div>
     </div>
