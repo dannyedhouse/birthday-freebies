@@ -34,12 +34,10 @@ axiosInstance
   .then((deals) => {
     let transaction = client.transaction();
     deals.forEach((deal) => {
-      transaction.createOrReplace(deal);
+      transaction.createIfNotExists(deal);
     });
-
     return transaction.commit();
   })
-
   .catch(console.error);
 
 function getData(response) {
@@ -67,11 +65,11 @@ function getData(response) {
       tag = "discount";
     }
 
-    const heading: string = dealParts[1].replace(".", "");
+    const heading: string = dealParts[1].replace(".", "").trim();
     const title: string = retailer + " - " + heading;
-    const dealSummary: string = dealParts[2];
-    const dealTerms: string = dealParts[3];
-    const _id: string = String(i);
+    const dealSummary: string = dealParts[2].trim();
+    const dealTerms: string = dealParts[3].trim();
+    const _id: string = retailer.replace(/[^\w\s]/g, "").replace(/\s/g, "");
     const _type: string = "deals";
 
     const popularity: number = 0;

@@ -10,6 +10,7 @@ async function getData() {
       "currentSlug": slug.current,
       url,
       image,
+      logo,
       content,
       dealSummary,
   }`;
@@ -20,10 +21,13 @@ async function getData() {
 
 export default async function Home() {
   const offerData: offer[] = await getData();
+  const sortedData: offer[] = offerData.sort(
+    (a, b) => a.dealSummary.length - b.dealSummary.length
+  );
 
   return (
     <>
-      <HeroSection data={offerData} />
+      <HeroSection data={sortedData} />
     </>
   );
 }
