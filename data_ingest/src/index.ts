@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import cheerio from "cheerio";
 import * as dotenv from "dotenv";
 import { createClient } from "next-sanity";
 dotenv.config();
 
-const url = process.env.DATA_SOURCE_URL;
+const url = process.env.DATA_SOURCE_URL!;
 
-interface dealData {
+interface NewDealData {
   _id: string;
   _type: string;
   title: string;
@@ -40,16 +40,15 @@ axiosInstance
   })
   .catch(console.error);
 
-function getData(response) {
+function getData(response: AxiosResponse): NewDealData[] {
   const html = response.data;
   const $ = cheerio.load(html);
   const dealList = $(".numbers > li");
-  const deals: dealData[] = [];
+  const deals: NewDealData[] = [];
 
   dealList.each((i, elem) => {
     const retailer: string = $(elem).find("h3").text();
-    const url: string = $(elem).find("a").attr("href");
-    const logoSrc: string = $(elem).find("img").attr("src");
+    const url: string = $(elem).find("a").attr("href") ?? "";
     const deal: string = $(elem).find("p").text();
 
     let dealParts: string[];

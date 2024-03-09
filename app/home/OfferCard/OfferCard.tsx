@@ -21,7 +21,7 @@ const OfferCard = (props: Props) => {
         alt={offer.retailer + " brand image"}
         width={500}
         height={500}
-        className="w-full object-cover object-center rounded-lg shadow-md"
+        className="w-full object-center rounded-lg shadow-md"
         priority
       />
 
@@ -46,14 +46,9 @@ const OfferCard = (props: Props) => {
             <OfferBadge tag={offer.tag} />
           </div>
           <h4 className="text-lg font-semibold mt-1">{offer.heading}</h4>
-
           <p className="text-sm">{offer.dealSummary}</p>
-
           <div className="flex items-center flex-wrap justify-between">
-            <a
-              className="underline text-blue-400 hover:text-blue-600"
-              href="https://"
-            >
+            <a className="underline text-blue-400 hover:text-blue-600" href="#">
               T&Cs
             </a>
             <Link href={offer.url} target="_blank" rel="noreferrer">

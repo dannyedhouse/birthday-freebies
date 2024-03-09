@@ -7,7 +7,7 @@ export interface offer {
   logo: string;
   tag: offerTags;
   currentSlug: string;
-  url: any;
+  url: string;
   dealSummary: string;
   dealTerms: string;
 }

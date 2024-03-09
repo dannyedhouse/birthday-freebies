@@ -13,6 +13,7 @@ async function getData() {
       logo,
       content,
       dealSummary,
+      dealTerms,
   }`;
 
   const data = await client.fetch(query);
