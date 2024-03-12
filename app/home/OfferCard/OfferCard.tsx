@@ -5,9 +5,9 @@ import Link from "next/link";
 import { FaShop } from "react-icons/fa6";
 import OfferBadge from "../OfferBadge/OfferBadge";
 
-type Props = { data: offer };
+type OfferCardProps = { data: offer };
 
-const OfferCard = (props: Props) => {
+const OfferCard = (props: OfferCardProps) => {
   const offer = props.data;
 
   return (
