@@ -25,12 +25,6 @@ export default function RootLayout({
         <div className="container mx-auto">
           <Header />
           <main>{children}</main>
-          <div className="pt-14 pb-4 font-raleway">
-            <p>
-              All logos and images used are copyright of the respective brands
-              shown.
-            </p>
-          </div>
         </div>
       </body>
     </html>
