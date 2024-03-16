@@ -69,7 +69,7 @@ export const SuggestionModal = () => {
                   >
                     Suggest a freebie
                   </Dialog.Title>
-                  <SuggestionForm onSubmit={() => console.log("Success!")} />
+                  <SuggestionForm onSubmit={() => closeModal()} />
                 </Dialog.Panel>
               </Transition.Child>
             </div>

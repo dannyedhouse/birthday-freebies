@@ -32,7 +32,7 @@ const FormField: React.FC<FormFieldProps> = ({
       {type === "textarea" ? (
         <textarea
           {...register}
-          className={`w-full bg-gray-100 text-black p-2 rounded-lg focus:outline-none focus:shadow-outline border border-solid ${
+          className={`w-full resize-none bg-gray-100 text-black p-2 rounded-lg focus:outline-none focus:shadow-outline border border-solid ${
             errors[name] ? "border-red-600" : ""
           }`}
           placeholder={placeholder}

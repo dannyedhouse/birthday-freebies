@@ -42,6 +42,7 @@ export const SuggestionForm: React.FC<FavFoodFormProps> = ({ onSubmit }) => {
           name={"description"}
           placeholder={"What is the freebie or deal?"}
           register={{ ...register("description") }}
+          type="textarea"
           errors={errors}
         />
         <FormField
