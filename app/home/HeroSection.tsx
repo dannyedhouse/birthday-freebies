@@ -1,7 +1,7 @@
 "use client";
 
+import OfferCard from "../../components/OfferCard/OfferCard";
 import { offer } from "../lib/types/offerInterface";
-import OfferCard from "./OfferCard/OfferCard";
 
 type Props = { data: offer[] };
 

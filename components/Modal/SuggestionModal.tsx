@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
-import { SuggestionForm } from "../Form/SuggestionForm";
+import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
 
 export const SuggestionModal = () => {
   let [isOpen, setIsOpen] = useState(false);

@@ -1,4 +1,4 @@
-import { SuggestionModal } from "@/app/home/Modal/SuggestionModal";
+import { SuggestionModal } from "@/components/Modal/SuggestionModal";
 import Image from "next/image";
 
 const Header = () => {

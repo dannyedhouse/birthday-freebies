@@ -45,22 +45,34 @@ const OfferCard = (props: OfferCardProps) => {
             </div>
             <OfferBadge tag={offer.tag} />
           </div>
-          <h4 className="text-lg font-semibold mt-1">{offer.heading}</h4>
-          <p className="text-sm pb-2">{offer.dealSummary}</p>
-          <div className="absolute bottom-0 left-0 w-full p-4">
-            <div className="flex items-center flex-wrap justify-between">
-              <a
-                className="underline text-blue-400 hover:text-blue-600"
-                href="#"
-              >
-                T&Cs
-              </a>
-              <Link href={offer.url} target="_blank" rel="noreferrer">
-                <button className="bg-brand-red hover:scale-105 px-4 py-1 rounded text-white font-raleway font-medium">
-                  <span className="flex gap-2 justify-center">Get Freebie</span>
-                </button>
-              </Link>
+
+          {/**Deal/offer card front*/}
+          <div>
+            <h4 className="text-lg font-semibold mt-1">{offer.heading}</h4>
+            <p className="text-sm pb-2">{offer.dealSummary}</p>
+            <div className="absolute bottom-0 left-0 w-full p-4">
+              <div className="flex items-center flex-wrap justify-between relative">
+                <a
+                  className="underline text-blue-400 hover:text-blue-600"
+                  href="#"
+                >
+                  T&Cs
+                </a>
+                <Link href={offer.url} target="_blank" rel="noreferrer">
+                  <button className="bg-brand-red hover:scale-105 px-4 py-1 rounded text-white font-raleway font-medium">
+                    <span className="flex gap-2 justify-center">
+                      Get Freebie
+                    </span>
+                  </button>
+                </Link>
+              </div>
             </div>
+          </div>
+
+          {/**Deal/offer card back T&Cs*/}
+          <div>
+            <h5 className="text-md font-semibold mt-1">Terms and Conditions</h5>
+            <p className="text-xs text-gray-500">{offer.dealTerms}</p>
           </div>
         </div>
       </div>
