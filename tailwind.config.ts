@@ -1,4 +1,25 @@
 import type { Config } from "tailwindcss";
+const plugin = require("tailwindcss/plugin");
+
+const Myclass = plugin(function ({ addUtilities }) {
+  addUtilities({
+    ".flip-offer-card": {
+      transform: "rotateY(180deg)",
+    },
+    ".flip-offer-card-reserve": {
+      transform: "rotateY(-180deg)",
+    },
+    ".preserve-3d": {
+      transformStyle: "preserve-3d",
+    },
+    ".perspective": {
+      perspective: "1000px",
+    },
+    ".backface-hidden": {
+      backfaceVisibility: "hidden",
+    },
+  });
+} as (parameters: { addUtilities: Function }) => void);
 
 const config: Config = {
   content: [
@@ -32,5 +53,6 @@ const config: Config = {
       },
     },
   },
+  plugins: [Myclass],
 };
 export default config;
