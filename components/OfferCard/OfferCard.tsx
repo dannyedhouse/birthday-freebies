@@ -1,14 +1,13 @@
 import { urlFor } from "@/app/lib/sanity";
-import { offer } from "@/app/lib/types/offerInterface";
+import { Offer } from "@/app/lib/types/OfferInterface";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaExternalLinkAlt } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
-
 import OfferBadge from "../OfferBadge/OfferBadge";
 
-type OfferCardProps = { data: offer };
+type OfferCardProps = { data: Offer };
 
 const OfferCard = (props: OfferCardProps) => {
   const offer = props.data;
@@ -23,7 +22,7 @@ const OfferCard = (props: OfferCardProps) => {
       <Image
         src={
           offer.image
-            ? urlFor(offer.image).width(600).height(400).url()
+            ? urlFor(offer.image).format("webp").width(600).height(400).url()
             : "https://placehold.co/600x400.png"
         }
         alt={offer.retailer + " brand image"}
@@ -33,14 +32,24 @@ const OfferCard = (props: OfferCardProps) => {
         priority
       />
       {offer.logo ? (
-        <Image
-          src={urlFor(offer.logo).width(100).height(40).url()}
-          alt={offer.retailer + " logo"}
-          width={100}
-          height={40}
-          className="absolute top-0 right-0 p-2 bg-white"
-          priority
-        />
+        <div
+          style={{
+            position: "absolute",
+            width: `${100}px`,
+            height: `${50}px`,
+            right: 0,
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src={urlFor(offer.logo).format("webp").url()}
+            alt={offer.retailer + " logo"}
+            objectFit="contain"
+            fill
+            className="absolute object-fill p-2 bg-white"
+            priority
+          />
+        </div>
       ) : null}
       <div className="flex-grow relative -mt-16 px-5">
         <div
@@ -77,12 +86,10 @@ const OfferCard = (props: OfferCardProps) => {
                 </button>
                 <Link href={offer.url} target="_blank" rel="noreferrer">
                   <button
-                    className="bg-brand-red hover:scale-105 px-4 py-1 rounded text-white font-raleway font-medium"
+                    className="bg-brand-red hover:scale-105 px-4 py-1 rounded text-white font-raleway font-medium flex gap-2 items-center"
                     disabled={toggleTerms}
                   >
-                    <span className="flex gap-2 justify-center">
-                      Get Freebie
-                    </span>
+                    Get Freebie <FaExternalLinkAlt />
                   </button>
                 </Link>
               </div>
@@ -95,11 +102,11 @@ const OfferCard = (props: OfferCardProps) => {
             <p className="text-xs text-grey-500">{offer.dealTerms}</p>
             <div className="absolute bottom-0 left-0 w-full p-4">
               <button
-                className="text-blue-400 hover:scale-105"
+                className="hover:scale-105 bg-blue-400 px-2 py-1 rounded text-white font-raleway font-medium"
                 onClick={onToggleTerms}
               >
                 <span className="inline-flex gap-2 items-center">
-                  <FaArrowAltCircleLeft />
+                  <FaArrowAltCircleLeft /> Got it!
                 </span>
               </button>
             </div>

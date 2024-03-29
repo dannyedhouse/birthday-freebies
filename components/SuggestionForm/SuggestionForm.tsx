@@ -15,7 +15,6 @@ export const SuggestionForm: React.FC<FavFoodFormProps> = ({ onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<SuggestionFormType>({
     resolver: zodResolver(suggestionFormSchema),
   });

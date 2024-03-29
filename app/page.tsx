@@ -1,12 +1,13 @@
 import HeroSection from "./home/HeroSection";
 import { client } from "./lib/sanity";
-import { offer } from "./lib/types/offerInterface";
+import { Offer } from "./lib/types/OfferInterface";
 
 async function getData() {
   const query = `*[_type == 'deals'] {
     heading,
       retailer,
       tag,
+      category,
       "currentSlug": slug.current,
       url,
       image,
@@ -21,14 +22,20 @@ async function getData() {
 }
 
 export default async function Home() {
-  const offerData: offer[] = await getData();
-  const sortedData: offer[] = offerData.sort(
+  const offerData: Offer[] = await getData();
+  const sortedData: Offer[] = offerData.sort(
     (a, b) => a.dealSummary.length - b.dealSummary.length
   );
 
   return (
     <>
       <HeroSection data={sortedData} />
+      <div className="pt-14 pb-4 font-raleway">
+        <p>
+          All logos and images used are copyright of the respective brands
+          shown. Other assets provided by Freepik.com.
+        </p>
+      </div>
     </>
   );
 }

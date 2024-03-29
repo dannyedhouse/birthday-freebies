@@ -1,1 +1,1 @@
-export type offerTags = "freebie" | "discount" | "no-app" | "limited";
+export type OfferTags = "freebie" | "discount" | "no-app" | "limited";

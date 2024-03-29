@@ -1,7 +1,7 @@
-import { offerTags } from "@/app/lib/types/offerTags";
+import { OfferTags } from "@/app/lib/types/OfferTags";
 
 interface OfferBadgeProps {
-  tag: offerTags;
+  tag: OfferTags;
 }
 
 const OfferBadge = (props: OfferBadgeProps) => {

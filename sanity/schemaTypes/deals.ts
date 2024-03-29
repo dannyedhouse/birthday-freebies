@@ -55,6 +55,14 @@ export default {
       title: 'T&Cs for the deal',
     },
     {
+      name: 'category',
+      type: 'string',
+      title: 'Category of the deal',
+      options: {
+        list: ['food', 'drinks', 'clothing', 'beauty', 'other'],
+      },
+    },
+    {
       name: 'url',
       type: 'url',
       title: 'URL to freebie/deal',

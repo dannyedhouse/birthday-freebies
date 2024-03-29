@@ -1,13 +1,15 @@
-import { offerTags } from "./offerTags";
+import { OfferCategory } from "@/types/OfferCategoryType";
+import { OfferTags } from "./OfferTags";
 
-export interface offer {
+export interface Offer {
   heading: string;
   retailer: string;
   image: string;
   logo: string;
-  tag: offerTags;
+  tag: OfferTags;
   currentSlug: string;
   url: string;
+  category: OfferCategory;
   dealSummary: string;
   dealTerms: string;
 }
