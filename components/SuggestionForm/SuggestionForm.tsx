@@ -1,7 +1,5 @@
-import {
-  SuggestionFormType,
-  suggestionFormSchema,
-} from "@/types/SuggestionFormType";
+import { suggestionFormSchema } from "@/models/SuggestionFormSchema";
+import { SuggestionFormType } from "@/types/SuggestionFormType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";

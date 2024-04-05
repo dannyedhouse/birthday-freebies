@@ -23,7 +23,7 @@ export default function Dropdown({
   return (
     <Listbox value={selected} onChange={(e) => setOption(e)}>
       <div className="relative mt-1">
-        <Listbox.Button className="relative w-max min-w-[158px] cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md sm:text-sm">
+        <Listbox.Button className="relative min-w-[128px] w-max text-xs py-2 pl-3 pr-7 sm:min-w-[158px] cursor-default rounded-lg bg-white sm:py-2 sm:pl-3 sm:pr-10 text-left shadow-md sm:text-sm">
           <span className="inline-flex gap-2 items-center">
             {selected.icon} {selected.name}
           </span>
@@ -38,7 +38,7 @@ export default function Dropdown({
           leaveTo="opacity-0"
         >
           <Listbox.Options
-            className="absolute z-20 mt-1 max-h-60 w-max  min-w-3.5 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+            className="absolute z-20 mt-1 max-h-60 w-max sm:min-w-3.5 overflow-auto rounded-md bg-white py-1 text-xs shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
             style={{ minWidth: "100%" }}
           >
             {options.map((option, optionIdx) => (

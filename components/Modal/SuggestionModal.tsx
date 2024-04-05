@@ -5,6 +5,7 @@ import { Fragment, useState } from "react";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
+import { Button } from "../ui/Button";
 
 export const SuggestionModal = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -19,16 +20,13 @@ export const SuggestionModal = () => {
 
   return (
     <>
-      <div className="">
-        <button
-          className="bg-brand-yellow hover:scale-105 text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center"
-          onClick={openModal}
-        >
+      <div>
+        <Button variant="secondary" onClick={openModal}>
           <FaRegPenToSquare />
           <span className="hidden sm:block px-2 font-raleway">
             Suggest a freebie
           </span>
-        </button>
+        </Button>
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>

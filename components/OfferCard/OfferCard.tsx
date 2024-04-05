@@ -6,8 +6,11 @@ import { useState } from "react";
 import { FaArrowAltCircleLeft, FaExternalLinkAlt } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import OfferBadge from "../OfferBadge/OfferBadge";
+import { Button } from "../ui/Button";
 
-type OfferCardProps = { data: Offer };
+interface OfferCardProps {
+  data: Offer;
+}
 
 const OfferCard = (props: OfferCardProps) => {
   const offer = props.data;
@@ -77,20 +80,17 @@ const OfferCard = (props: OfferCardProps) => {
             <p className="text-sm pb-2">{offer.dealSummary}</p>
             <div className={`absolute bottom-0 left-0 w-full p-4`}>
               <div className="flex items-center flex-wrap justify-between relative">
-                <button
-                  className="underline text-blue-400 hover:text-blue-600"
+                <Button
+                  variant="link"
                   onClick={onToggleTerms}
                   disabled={toggleTerms}
                 >
                   T&Cs
-                </button>
+                </Button>
                 <Link href={offer.url} target="_blank" rel="noreferrer">
-                  <button
-                    className="bg-brand-red hover:scale-105 px-4 py-1 rounded text-white font-raleway font-medium flex gap-2 items-center"
-                    disabled={toggleTerms}
-                  >
+                  <Button variant="primary" disabled={toggleTerms}>
                     Get Freebie <FaExternalLinkAlt />
-                  </button>
+                  </Button>
                 </Link>
               </div>
             </div>
@@ -101,14 +101,11 @@ const OfferCard = (props: OfferCardProps) => {
             <h5 className="text-md font-semibold">Terms and Conditions</h5>
             <p className="text-xs text-grey-500">{offer.dealTerms}</p>
             <div className="absolute bottom-0 left-0 w-full p-4">
-              <button
-                className="hover:scale-105 bg-blue-400 px-2 py-1 rounded text-white font-raleway font-medium"
-                onClick={onToggleTerms}
-              >
+              <Button variant="info" onClick={onToggleTerms}>
                 <span className="inline-flex gap-2 items-center">
                   <FaArrowAltCircleLeft /> Got it!
                 </span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>

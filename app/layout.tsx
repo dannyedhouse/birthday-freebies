@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
 import Header from "./layout/Header/header";
@@ -12,6 +12,13 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   title: "Birthday Freebie - freebies and discounts",
   description: "Birthday freebies and birthday discounts",
+};
+
+export const viewport: Viewport = {
+  width: 300,
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({

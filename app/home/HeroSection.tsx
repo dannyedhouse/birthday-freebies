@@ -1,13 +1,14 @@
 "use client";
 
 import Dropdown, { DropdownOption } from "@/components/Dropdown/Dropdown";
+import { TagButton } from "@/components/TagButton/TagButton";
+import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { useState } from "react";
 import { BiCategory } from "react-icons/bi";
 import { FaCocktail } from "react-icons/fa";
 import { FaPaintbrush } from "react-icons/fa6";
 import { GiAmpleDress, GiHamburger } from "react-icons/gi";
-import { IoMdClose } from "react-icons/io";
 import { MdMore } from "react-icons/md";
 import OfferCard from "../../components/OfferCard/OfferCard";
 import { Offer } from "../lib/types/OfferInterface";
@@ -54,38 +55,24 @@ const HeroSection = (props: Props) => {
 
   return (
     <>
-      <div className="inline-flex gap-4 mb-6 bg-primary">
+      <div className="flex gap-2 sm:gap-4 mb-6 bg-primary">
         <Dropdown
           selected={selectedCategory}
           setSelected={setSelectedCategory}
           options={options}
         />
-        <button
+        <TagButton
+          label={"freebie"}
           onClick={handleFreebiesClick}
-          className={` font-raleway mt-1 pl-4 pr-4 rounded-lg hover:bg-teal-200 border-teal-600 border-2 " ${
-            selectedTag === "freebie"
-              ? "bg-teal-200 border-solid"
-              : "bg-white bg-opacity-40 border-dashed"
-          }`}
-        >
-          <span className="flex items-center gap-2">
-            Freebies
-            {selectedTag === "freebie" ? <IoMdClose /> : null}
-          </span>
-        </button>
-        <button
+          isSelected={selectedTag === "freebie"}
+          colour={"teal"}
+        />
+        <TagButton
+          label={"discount"}
           onClick={handleDiscountsClick}
-          className={` font-raleway mt-1 pl-4 pr-4 rounded-lg hover:bg-red-200 border-red-600 border-2 " ${
-            selectedTag === "discount"
-              ? "bg-red-200 border-solid"
-              : "bg-white bg-opacity-40 border-dashed"
-          }`}
-        >
-          <span className="flex items-center gap-2">
-            Discounts
-            {selectedTag === "discount" ? <IoMdClose /> : null}
-          </span>
-        </button>
+          isSelected={selectedTag === "discount"}
+          colour={"red"}
+        />
       </div>
 
       {filteredOffers.length != 0 ? (
@@ -100,14 +87,9 @@ const HeroSection = (props: Props) => {
             <p className=" bg-primary font-raleway text-2xl h-fit mb-2">
               <i>No freebies or deals found 💔</i>
             </p>
-            <button
-              className="bg-brand-red hover:scale-105 px-4 py-1 rounded text-white font-raleway font-medium"
-              onClick={resetFilters}
-            >
-              <span className="flex gap-2 justify-center">
-                Clear all filters
-              </span>
-            </button>
+            <Button variant="primary" onClick={resetFilters}>
+              Clear all filters
+            </Button>
           </div>
           <Image
             priority
