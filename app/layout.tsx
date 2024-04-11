@@ -1,3 +1,4 @@
+import { ScrollToTopButton } from "@/components/ScrollToTop/ScrollToTop";
 import type { Metadata, Viewport } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
@@ -32,6 +33,7 @@ export default function RootLayout({
         <div className="container mx-auto">
           <Header />
           <main>{children}</main>
+          <ScrollToTopButton />
         </div>
       </body>
     </html>

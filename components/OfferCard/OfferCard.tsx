@@ -98,8 +98,10 @@ const OfferCard = (props: OfferCardProps) => {
 
           {/**Deal/offer card back T&Cs*/}
           <div className="absolute flip-offer-card backface-hidden top-0 right-0 p-4 h-full">
-            <h5 className="text-md font-semibold">Terms and Conditions</h5>
-            <p className="text-xs text-grey-500">{offer.dealTerms}</p>
+            <div className="max-h-[70%] overflow-y-auto">
+              <h5 className="text-md font-semibold">Terms and Conditions</h5>
+              <p className="text-xs text-grey-500 ">{offer.dealTerms}</p>
+            </div>
             <div className="absolute bottom-0 left-0 w-full p-4">
               <Button variant="info" onClick={onToggleTerms}>
                 <span className="inline-flex gap-2 items-center">

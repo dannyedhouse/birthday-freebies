@@ -55,7 +55,7 @@ const HeroSection = (props: Props) => {
 
   return (
     <>
-      <div className="flex gap-2 sm:gap-4 mb-6 bg-primary">
+      <div className="flex gap-2 sm:gap-4 m-auto mb-6 bg-primary md:m-0 md:mb-6 w-fit">
         <Dropdown
           selected={selectedCategory}
           setSelected={setSelectedCategory}
