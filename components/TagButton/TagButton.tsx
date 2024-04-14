@@ -1,4 +1,4 @@
-import { OfferTags } from "@/app/lib/types/OfferTags";
+import { OfferTags } from "@/types/OfferTags";
 import { IoMdClose } from "react-icons/io";
 
 interface TagButton {

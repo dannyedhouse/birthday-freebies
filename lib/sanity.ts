@@ -5,7 +5,15 @@ import { createClient } from "next-sanity";
 export const client = createClient({
   apiVersion: "2024-03-01",
   projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_dataset,
+  dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET,
+  useCdn: false,
+});
+
+export const writeClient = createClient({
+  apiVersion: "2024-03-01",
+  projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET,
+  token: process.env.NEXT_PUBLIC_SANITY_STUDIO_TOKEN,
   useCdn: false,
 });
 

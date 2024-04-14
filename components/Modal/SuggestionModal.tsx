@@ -1,5 +1,7 @@
 "use client";
 
+import { writeClient } from "@/lib/sanity";
+import { SuggestionFormType } from "@/types/SuggestionFormType";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FaRegPenToSquare } from "react-icons/fa6";
@@ -18,6 +20,26 @@ export const SuggestionModal = () => {
     setIsOpen(true);
   }
 
+  const transformData = (data: SuggestionFormType) => {
+    let transformedData;
+    const _id: string = new Date().getTime().toString();
+    const _type: string = "suggestions";
+    const retailer: string = data.retailer;
+    const description: string = data.description;
+    const url: string = data.url;
+
+    transformedData = { _id, _type, retailer, description, url };
+    return transformedData;
+  };
+
+  const submitSuggestionData = (data: SuggestionFormType) => {
+    closeModal();
+    let transaction = writeClient.transaction();
+    const transformedData = transformData(data);
+    transaction.createIfNotExists(transformedData);
+    return transaction.commit();
+  };
+
   return (
     <>
       <div>
@@ -28,7 +50,6 @@ export const SuggestionModal = () => {
           </span>
         </Button>
       </div>
-
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -42,7 +63,6 @@ export const SuggestionModal = () => {
           >
             <div className="fixed inset-0 bg-black/25" />
           </Transition.Child>
-
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
@@ -67,7 +87,9 @@ export const SuggestionModal = () => {
                   >
                     Suggest a freebie
                   </Dialog.Title>
-                  <SuggestionForm onSubmit={() => closeModal()} />
+                  <SuggestionForm
+                    onSubmit={(data) => submitSuggestionData(data)}
+                  />
                 </Dialog.Panel>
               </Transition.Child>
             </div>

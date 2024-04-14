@@ -1,6 +1,6 @@
+import { client } from "../lib/sanity";
+import { Offer } from "../types/OfferInterface";
 import HeroSection from "./home/HeroSection";
-import { client } from "./lib/sanity";
-import { Offer } from "./lib/types/OfferInterface";
 
 async function getData() {
   const query = `*[_type == 'deals'] {

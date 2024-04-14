@@ -1,5 +1,5 @@
-import { urlFor } from "@/app/lib/sanity";
-import { Offer } from "@/app/lib/types/OfferInterface";
+import { urlFor } from "@/lib/sanity";
+import { Offer } from "@/types/OfferInterface";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";

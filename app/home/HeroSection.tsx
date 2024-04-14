@@ -11,7 +11,7 @@ import { FaPaintbrush } from "react-icons/fa6";
 import { GiAmpleDress, GiHamburger } from "react-icons/gi";
 import { MdMore } from "react-icons/md";
 import OfferCard from "../../components/OfferCard/OfferCard";
-import { Offer } from "../lib/types/OfferInterface";
+import { Offer } from "../../types/OfferInterface";
 type Props = { data: Offer[] };
 
 const options: DropdownOption[] = [

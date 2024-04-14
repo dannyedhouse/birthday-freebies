@@ -4,11 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormField from "./FormField";
 
-type FavFoodFormProps = {
+type SuggestionFormProps = {
   onSubmit: (data: SuggestionFormType) => void;
 };
 
-export const SuggestionForm: React.FC<FavFoodFormProps> = ({ onSubmit }) => {
+export const SuggestionForm: React.FC<SuggestionFormProps> = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
