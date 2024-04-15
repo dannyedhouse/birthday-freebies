@@ -30,12 +30,6 @@ export default async function Home() {
   return (
     <>
       <HeroSection data={sortedData} />
-      <div className="pt-14 pb-4 font-raleway">
-        <p>
-          All logos and images used are copyright of the respective brands
-          shown. Other assets provided by Freepik.com.
-        </p>
-      </div>
     </>
   );
 }

@@ -2,6 +2,7 @@ import { ScrollToTopButton } from "@/components/ScrollToTop/ScrollToTop";
 import type { Metadata, Viewport } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
+import { Footer } from "./layout/Header/footer";
 import Header from "./layout/Header/header";
 
 const raleway = Raleway({
@@ -35,6 +36,7 @@ export default function RootLayout({
           <main>{children}</main>
           <ScrollToTopButton />
         </div>
+        <Footer />
       </body>
     </html>
   );

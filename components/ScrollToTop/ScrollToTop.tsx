@@ -27,7 +27,7 @@ export const ScrollToTopButton = () => {
 
   return (
     <button
-      className={`fixed bottom-4 right-4 m-0 md:m-2 rounded-full outline-none duration-200 bg-gray-600 border-0  text-primary ${
+      className={`fixed bottom-4 right-4 m-0 md:m-2 z-20 rounded-full outline-none duration-200 bg-gray-600 border-0  text-primary ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       onClick={scrollToTop}
