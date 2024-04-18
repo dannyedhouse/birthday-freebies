@@ -1,15 +1,11 @@
 ## Birthday Freebies
 
+Website showing birthday freebies and discounts, sourced from a Sanity headless CMS instance.
+
 ## Running Application Locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`npm i` to install dependencies
 
-[http://localhost:3000](http://localhost:3000)
+`npm run dev` to start the application locally
+
+The Sanity admin studio is hosted on `/studio` - after authentication to update deals/freebies and view suggested submitted.

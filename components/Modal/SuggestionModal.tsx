@@ -1,6 +1,6 @@
 'use client'
 
-import {submitSuggestions} from '@/app/(client)/api/submitSuggestions'
+import {submitSuggestions} from '@/app/api/submitSuggestions'
 import {SuggestionFormType} from '@/types/SuggestionFormType'
 import Image from 'next/image'
 import {ReactElement, useState} from 'react'
