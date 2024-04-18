@@ -31,7 +31,7 @@ const OfferCard = (props: OfferCardProps) => {
         alt={offer.retailer + " brand image"}
         width={600}
         height={400}
-        className="w-full object-center rounded-lg shadow-md"
+        className="w-full object-center rounded-lg shadow-md bg-white"
         priority
       />
       {offer.logo ? (
@@ -47,9 +47,10 @@ const OfferCard = (props: OfferCardProps) => {
           <Image
             src={urlFor(offer.logo).format("webp").url()}
             alt={offer.retailer + " logo"}
-            objectFit="contain"
+            style={{ objectFit: "contain" }}
             fill
-            className="absolute object-fill p-2 bg-white"
+            sizes={"(max-width: 600px) auto, auto"}
+            className="absolute  p-2 bg-white"
             priority
           />
         </div>

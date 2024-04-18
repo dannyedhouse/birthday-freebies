@@ -4,11 +4,12 @@ import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
-  name: 'default',
-  title: 'birthday-freebies-cms',
+  name: 'birthday-freebies-cms',
+  title: 'Birthday Freebies | Studio',
+  basePath: '/studio',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
-  dataset: process.env.SANITY_STUDIO_DATASET!,
+  projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET!,
 
   plugins: [structureTool(), visionTool()],
 

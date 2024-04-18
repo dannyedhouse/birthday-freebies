@@ -1,21 +1,21 @@
-"use client";
+'use client'
 
-import { writeClient } from "@/lib/sanity";
-import { SuggestionFormType } from "@/types/SuggestionFormType";
-import Image from "next/image";
-import { ReactElement, useState } from "react";
-import { FaRegPenToSquare } from "react-icons/fa6";
-import { SuggestionForm } from "../SuggestionForm/SuggestionForm";
-import { Button } from "../ui/Button";
-import { Modal } from "./Modal";
+import {submitSuggestions} from '@/app/(client)/api/submitSuggestions'
+import {SuggestionFormType} from '@/types/SuggestionFormType'
+import Image from 'next/image'
+import {ReactElement, useState} from 'react'
+import {FaRegPenToSquare} from 'react-icons/fa6'
+import {SuggestionForm} from '../SuggestionForm/SuggestionForm'
+import {Button} from '../ui/Button'
+import {Modal} from './Modal'
 
 export const SuggestionModal = () => {
-  let [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactElement | null>(null);
+  let [isOpen, setIsOpen] = useState(false)
+  const [modalContent, setModalContent] = useState<ReactElement | null>(null)
 
   function closeModal() {
-    setIsOpen(false);
-    setModalContent(null);
+    setIsOpen(false)
+    setModalContent(null)
   }
 
   const successMessage = (): ReactElement => {
@@ -23,58 +23,34 @@ export const SuggestionModal = () => {
       <>
         <div className="flex gap-4">
           <div>
-            <Image
-              src={"/icon.png"}
-              width={40}
-              height={40}
-              alt="success icon"
-            />
+            <Image src={'/icon.png'} width={40} height={40} alt="success icon" />
           </div>
           <div>
             <h2 className="text-lg">Thank you</h2>
-            <p>
-              We have received your submission, and we will review the deal.
-            </p>
+            <p>We have received your submission, and we will review the deal.</p>
           </div>
         </div>
       </>
-    );
-  };
-
-  function openModal() {
-    setIsOpen(true);
-    setModalContent(<SuggestionForm onSubmit={submitSuggestionData} />);
+    )
   }
 
-  const transformData = (data: SuggestionFormType) => {
-    let transformedData;
-    const _id: string = new Date().getTime().toString();
-    const _type: string = "suggestions";
-    const retailer: string = data.retailer;
-    const description: string = data.description;
-    const url: string = data.url;
-
-    transformedData = { _id, _type, retailer, description, url };
-    return transformedData;
-  };
+  function openModal() {
+    setIsOpen(true)
+    setModalContent(<SuggestionForm onSubmit={submitSuggestionData} />)
+  }
 
   const submitSuggestionData = (data: SuggestionFormType) => {
-    let transaction = writeClient.transaction();
-    const transformedData = transformData(data);
-    transaction.createIfNotExists(transformedData);
-    transaction.commit();
-    setModalContent(successMessage);
-    setTimeout(() => closeModal(), 5000);
-  };
+    submitSuggestions(data)
+    setModalContent(successMessage)
+    setTimeout(() => closeModal(), 5000)
+  }
 
   return (
     <>
       <div>
         <Button variant="secondary" onClick={openModal}>
           <FaRegPenToSquare />
-          <span className="hidden sm:block px-2 font-raleway">
-            Suggest a freebie
-          </span>
+          <span className="hidden sm:block px-2 font-raleway">Suggest a freebie</span>
         </Button>
       </div>
       <Modal
@@ -84,5 +60,5 @@ export const SuggestionModal = () => {
         content={modalContent}
       />
     </>
-  );
-};
+  )
+}
