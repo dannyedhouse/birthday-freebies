@@ -6,7 +6,7 @@ export const client = createClient({
   apiVersion: process.env.NEXT_PUBLIC_SANITY_STUDIO_API_VERSON,
   projectId: process.env.NEXT_PUBLIC_SANITY_STUDIO_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_STUDIO_DATASET,
-  useCdn: false,
+  useCdn: true,
 })
 
 export const writeClient = createClient({

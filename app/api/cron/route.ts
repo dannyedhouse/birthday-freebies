@@ -1,8 +1,7 @@
+import {writeClient} from '@/lib/sanity'
 import axios, {AxiosResponse} from 'axios'
 import cheerio from 'cheerio'
-import * as dotenv from 'dotenv'
-import {createClient} from 'next-sanity'
-dotenv.config()
+import {NextRequest} from 'next/server'
 
 const url = process.env.DATA_SOURCE_URL!
 
@@ -19,26 +18,30 @@ interface NewDealData {
   popularity: number
 }
 
-export const client = createClient({
-  apiVersion: process.env.SANITY_STUDIO_API_VERSION,
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
-  dataset: process.env.SANITY_STUDIO_DATASET,
-  token: process.env.SANITY_STUDIO_TOKEN,
-  useCdn: false,
-})
+/** Vercel Cronjob for sourcing new freebies/deals */
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get('authorization')
 
-const axiosInstance = axios.create()
-axiosInstance
-  .get(url)
-  .then((response) => getData(response))
-  .then((deals) => {
-    let transaction = client.transaction()
-    deals.forEach((deal) => {
-      transaction.createIfNotExists(deal)
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response('Unauthorized', {
+      status: 401,
     })
-    return transaction.commit()
-  })
-  .catch(console.error)
+  }
+
+  const axiosInstance = axios.create()
+  axiosInstance
+    .get(url)
+    .then((response) => getData(response))
+    .then((deals) => {
+      let transaction = writeClient.transaction()
+      deals.forEach((deal) => {
+        transaction.createIfNotExists(deal)
+      })
+      return transaction.commit()
+    })
+    .catch()
+  return Response.json({message: 'Updated successfully'})
+}
 
 function getData(response: AxiosResponse): NewDealData[] {
   const html = response.data
