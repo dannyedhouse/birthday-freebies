@@ -1,9 +1,9 @@
+import {Footer} from '@/components/Layout/footer'
+import {Header} from '@/components/Layout/header'
 import {ScrollToTopButton} from '@/components/ScrollToTop/ScrollToTop'
 import type {Metadata, Viewport} from 'next'
 import {Raleway} from 'next/font/google'
-import './globals.css'
-import {Footer} from './layout/footer'
-import Header from './layout/header'
+import '../globals.css'
 
 const raleway = Raleway({
   subsets: ['latin'],

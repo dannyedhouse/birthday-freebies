@@ -1,52 +1,61 @@
-import { suggestionFormSchema } from "@/models/SuggestionFormSchema";
-import { SuggestionFormType } from "@/types/SuggestionFormType";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import FormField from "./FormField";
+// import {transformData} from '@/app/api/submitSuggestions'
+import {suggestionFormSchema} from '@/models/SuggestionFormSchema'
+import {SuggestionFormType} from '@/types/SuggestionFormType'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useForm} from 'react-hook-form'
+import FormField from './FormField'
 
 type SuggestionFormProps = {
-  onSubmit: (data: SuggestionFormType) => void;
-};
+  onSubmit: () => void
+}
 
-export const SuggestionForm: React.FC<SuggestionFormProps> = ({ onSubmit }) => {
+export const SuggestionForm: React.FC<SuggestionFormProps> = ({onSubmit}) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm<SuggestionFormType>({
     resolver: zodResolver(suggestionFormSchema),
-  });
+  })
 
-  const submitHandler = (data: SuggestionFormType) => {
-    onSubmit(data);
-  };
+  const submitHandler = async (data: SuggestionFormType) => {
+    const transformedData = transformData(data)
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/submit-suggestion`, {
+        method: 'POST',
+        body: JSON.stringify(transformedData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    } catch (error) {}
+    onSubmit()
+  }
 
   return (
-    <form
-      onSubmit={handleSubmit(submitHandler)}
-      className="flex flex-col gap-2"
-    >
+    <form onSubmit={handleSubmit(submitHandler)} className="flex flex-col gap-2">
       <div>
         <FormField
-          label={"Brand/Retailer*"}
-          name={"retailer"}
+          label={'Brand/Retailer*'}
+          name={'retailer'}
           placeholder={"e.g. McDonald's"}
-          register={{ ...register("retailer") }}
+          register={{...register('retailer')}}
           errors={errors}
         />
         <FormField
-          label={"Description*"}
-          name={"description"}
-          placeholder={"What is the freebie or deal?"}
-          register={{ ...register("description") }}
+          label={'Description*'}
+          name={'description'}
+          placeholder={'What is the freebie or deal?'}
+          register={{...register('description')}}
           type="textarea"
           errors={errors}
         />
         <FormField
-          label={"URL*"}
-          name={"url"}
-          placeholder={"https://"}
-          register={{ ...register("url") }}
+          label={'URL*'}
+          name={'url'}
+          placeholder={'https://'}
+          register={{...register('url')}}
           errors={errors}
         />
       </div>
@@ -61,5 +70,15 @@ export const SuggestionForm: React.FC<SuggestionFormProps> = ({ onSubmit }) => {
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
+
+const transformData = (data: SuggestionFormType) => {
+  const _id: string = new Date().getTime().toString()
+  const _type: string = 'suggestions'
+  const retailer: string = data.retailer
+  const description: string = data.description
+  const url: string = data.url
+
+  return {_id, _type, retailer, description, url}
+}

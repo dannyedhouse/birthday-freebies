@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/Button";
-import Image from "next/image";
-import Link from "next/link";
+import {Button} from '@/components/ui/Button'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function NotFound() {
   return (
@@ -13,14 +13,7 @@ export default function NotFound() {
           <Button variant="primary">Return Home</Button>
         </Link>
       </div>
-      <Image
-        priority
-        className=""
-        src={"/404.webp"}
-        alt="404 image"
-        height={800}
-        width={600}
-      />
+      <Image priority className="" src={'/404.webp'} alt="404 image" height={800} width={600} />
     </div>
-  );
+  )
 }

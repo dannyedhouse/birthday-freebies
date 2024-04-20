@@ -1,7 +1,5 @@
 'use client'
 
-import {submitSuggestions} from '@/app/api/submitSuggestions'
-import {SuggestionFormType} from '@/types/SuggestionFormType'
 import Image from 'next/image'
 import {ReactElement, useState} from 'react'
 import {FaRegPenToSquare} from 'react-icons/fa6'
@@ -18,6 +16,16 @@ export const SuggestionModal = () => {
     setModalContent(null)
   }
 
+  function openModal() {
+    setIsOpen(true)
+    setModalContent(<SuggestionForm onSubmit={closeModalOnSubmit} />)
+  }
+
+  const closeModalOnSubmit = () => {
+    setModalContent(successMessage)
+    setTimeout(() => closeModal(), 5000)
+  }
+
   const successMessage = (): ReactElement => {
     return (
       <>
@@ -32,17 +40,6 @@ export const SuggestionModal = () => {
         </div>
       </>
     )
-  }
-
-  function openModal() {
-    setIsOpen(true)
-    setModalContent(<SuggestionForm onSubmit={submitSuggestionData} />)
-  }
-
-  const submitSuggestionData = (data: SuggestionFormType) => {
-    submitSuggestions(data)
-    setModalContent(successMessage)
-    setTimeout(() => closeModal(), 5000)
   }
 
   return (

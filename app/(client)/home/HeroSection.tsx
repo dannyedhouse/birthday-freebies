@@ -55,7 +55,7 @@ const HeroSection = (props: Props) => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-between align-center gap-2 sm:gap-4 mb-6 bg-primary w-full">
+      <div className="flex flex-wrap justify-between align-center gap-2 sm:gap-4 mb-2 md:mb-6 bg-primary w-full">
         <div className="flex gap-2 sm:gap-4 justify-center w-full md:justify-start md:w-fit">
           <Dropdown
             selected={selectedCategory}
@@ -75,7 +75,7 @@ const HeroSection = (props: Props) => {
             colour={'red'}
           />
         </div>
-        <p className="font-raleway text-sm sm:text-base text-center w-full md:text-right md:w-auto">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
+        <p className="mt-2 font-raleway text-sm sm:text-base text-center w-full md:text-right md:w-auto">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
       </div>
       {}
 
