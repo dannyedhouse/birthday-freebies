@@ -1,5 +1,5 @@
-import {Footer} from '@/components/Layout/footer'
-import {Header} from '@/components/Layout/header'
+import {Footer} from '@/components/Layout/Footer'
+import {Header} from '@/components/Layout/Header'
 import {ScrollToTopButton} from '@/components/ScrollToTop/ScrollToTop'
 import type {Metadata, Viewport} from 'next'
 import {Raleway} from 'next/font/google'
