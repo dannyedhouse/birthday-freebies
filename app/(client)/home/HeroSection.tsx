@@ -25,32 +25,30 @@ const options: DropdownOption[] = [
 
 const HeroSection = (props: Props) => {
   const [selectedCategory, setSelectedCategory] = useState(options[0])
-  const [selectedTag, setSelectedTag] = useState<string | null>(null)
+  const [selectedTags, setSelectedTags] = useState<string[]>(['freebie', 'discount'])
 
-  const handleFreebiesClick = () => {
-    setSelectedTag((prevTag) => (prevTag === 'freebie' ? null : 'freebie'))
-  }
+  const handleTagClick = (selectedTag: string) => {
+    setSelectedTags((prevTags) => {
+      const newTags = prevTags.includes(selectedTag)
+        ? prevTags.filter((t) => t !== selectedTag)
+        : [...prevTags, selectedTag]
 
-  const handleDiscountsClick = () => {
-    setSelectedTag((prevTag) => (prevTag === 'discount' ? null : 'discount'))
+      return newTags.length === 0 ? ['freebie', 'discount'] : newTags
+    })
   }
 
   const resetFilters = () => {
     setSelectedCategory(options[0])
-    setSelectedTag(null)
+    setSelectedTags(['freebie', 'discount'])
   }
 
   const filteredOffers = props.data.filter((offer) => {
-    if (selectedCategory.name === 'All categories' && !selectedTag) {
-      return true
-    } else if (selectedCategory.name === 'All categories') {
-      return offer.tag === selectedTag
-    } else {
-      return (
-        offer.category === selectedCategory.name.toLowerCase() &&
-        (!selectedTag || offer.tag === selectedTag)
-      )
-    }
+    const categoryMatches =
+      selectedCategory.name === 'All categories' ||
+      offer.category === selectedCategory.name.toLowerCase()
+
+    const tagMatches = selectedTags.length === 0 || selectedTags.includes(offer.tag)
+    return categoryMatches && tagMatches
   })
 
   return (
@@ -64,20 +62,17 @@ const HeroSection = (props: Props) => {
           />
           <TagButton
             label={'freebie'}
-            onClick={handleFreebiesClick}
-            isSelected={selectedTag === 'freebie'}
-            colour={'teal'}
+            onClick={() => handleTagClick('freebie')}
+            isSelected={selectedTags.includes('freebie')}
           />
           <TagButton
             label={'discount'}
-            onClick={handleDiscountsClick}
-            isSelected={selectedTag === 'discount'}
-            colour={'red'}
+            onClick={() => handleTagClick('discount')}
+            isSelected={selectedTags.includes('discount')}
           />
         </div>
         <p className="mt-2 font-raleway text-sm sm:text-base text-center w-full md:text-right md:w-auto">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
       </div>
-      {}
 
       {filteredOffers.length != 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 pb-12">

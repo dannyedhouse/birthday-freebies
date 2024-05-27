@@ -24,3 +24,7 @@ body {
   background-repeat: repeat;
   background-size: calc(30%);
 }
+
+p {
+  color: black;
+}
