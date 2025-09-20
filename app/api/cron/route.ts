@@ -1,6 +1,6 @@
 import {writeClient} from '@/lib/sanity'
 import axios, {AxiosResponse} from 'axios'
-import cheerio from 'cheerio'
+import * as cheerio from 'cheerio'
 import {NextRequest} from 'next/server'
 
 const url = process.env.DATA_SOURCE_URL!
