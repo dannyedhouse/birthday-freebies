@@ -1,4 +1,4 @@
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { Fragment } from "react";
 import { IoMdClose } from "react-icons/io";
 
@@ -13,7 +13,7 @@ export const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={onClose}>
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -23,10 +23,10 @@ export const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-black/25" />
-        </Transition.Child>
+        </TransitionChild>
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
@@ -35,22 +35,22 @@ export const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <button
                   className="absolute top-0 right-0 m-4"
                   onClick={onClose}
                 >
                   <IoMdClose size={20} />
                 </button>
-                <Dialog.Title
+                <DialogTitle
                   as="h4"
                   className="text-lg text-gray-900 font-raleway font-bold mb-4"
                 >
                   {title}
-                </Dialog.Title>
+                </DialogTitle>
                 {content}
-              </Dialog.Panel>
-            </Transition.Child>
+              </DialogPanel>
+            </TransitionChild>
           </div>
         </div>
       </Dialog>

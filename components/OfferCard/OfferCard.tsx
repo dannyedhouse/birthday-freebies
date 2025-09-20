@@ -1,34 +1,34 @@
-import { urlFor } from "@/lib/sanity";
-import { Offer } from "@/types/OfferInterface";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { FaArrowAltCircleLeft, FaExternalLinkAlt } from "react-icons/fa";
-import { FaShop } from "react-icons/fa6";
-import OfferBadge from "../OfferBadge/OfferBadge";
-import { Button } from "../ui/Button";
+import {urlFor} from '@/lib/sanity'
+import {Offer} from '@/types/OfferInterface'
+import Image from 'next/image'
+import Link from 'next/link'
+import {useState} from 'react'
+import {FaArrowAltCircleLeft, FaExternalLinkAlt} from 'react-icons/fa'
+import {FaShop} from 'react-icons/fa6'
+import OfferBadge from '../OfferBadge/OfferBadge'
+import {Button} from '../ui/Button'
 
 interface OfferCardProps {
-  data: Offer;
+  data: Offer
 }
 
 const OfferCard = (props: OfferCardProps) => {
-  const offer = props.data;
-  let [toggleTerms, setToggleTerms] = useState<boolean>(false);
+  const offer = props.data
+  let [toggleTerms, setToggleTerms] = useState<boolean>(false)
 
   const onToggleTerms = () => {
-    setToggleTerms((toggleTerms = !toggleTerms));
-  };
+    setToggleTerms((toggleTerms = !toggleTerms))
+  }
 
   return (
     <div className="relative flex flex-col">
       <Image
         src={
           offer.image
-            ? urlFor(offer.image).format("webp").width(600).height(400).url()
-            : "https://placehold.co/600x400.png"
+            ? urlFor(offer.image).format('webp').width(600).height(400).url()
+            : 'https://placehold.co/600x400.png'
         }
-        alt={offer.retailer + " brand image"}
+        alt={offer.retailer + ' brand image'}
         width={600}
         height={400}
         className="w-full object-center rounded-lg shadow-md bg-white"
@@ -37,19 +37,19 @@ const OfferCard = (props: OfferCardProps) => {
       {offer.logo ? (
         <div
           style={{
-            position: "absolute",
+            position: 'absolute',
             width: `${100}px`,
             height: `${50}px`,
             right: 0,
-            overflow: "hidden",
+            overflow: 'hidden',
           }}
         >
           <Image
-            src={urlFor(offer.logo).format("webp").url()}
-            alt={offer.retailer + " logo"}
-            style={{ objectFit: "contain" }}
+            src={urlFor(offer.logo).format('webp').url()}
+            alt={offer.retailer + ' logo'}
+            style={{objectFit: 'contain'}}
             fill
-            sizes={"(max-width: 600px) auto, auto"}
+            sizes={'(max-width: 600px) auto, auto'}
             className="absolute  p-2 bg-white"
             priority
           />
@@ -59,15 +59,11 @@ const OfferCard = (props: OfferCardProps) => {
         <div
           className={`bg-white rounded-lg shadow-lg p-4 h-full relative pb-12 ${
             toggleTerms
-              ? "preserve-3d flip-offer-card w-full h-full duration-1000"
-              : "preserve-3d flip-offer-card-reverse w-full h-full duration-1000 "
+              ? 'preserve-3d flip-offer-card w-full h-full duration-1000'
+              : 'preserve-3d flip-offer-card-reverse w-full h-full duration-1000 '
           }`}
         >
-          <div
-            className={`backface-hidden ${
-              toggleTerms ? "pointer-events-none" : ""
-            }`}
-          >
+          <div className={`backface-hidden ${toggleTerms ? 'pointer-events-none' : ''}`}>
             <div className="flex items-baseline -ml-2 justify-between">
               <div className="ml-2 text-gray-600 uppercase text-xs font-semibold flex gap-1 items-center">
                 <FaShop />
@@ -81,11 +77,7 @@ const OfferCard = (props: OfferCardProps) => {
             <p className="text-sm pb-2">{offer.dealSummary}</p>
             <div className={`absolute bottom-0 left-0 w-full p-4`}>
               <div className="flex items-center flex-wrap justify-between relative">
-                <Button
-                  variant="link"
-                  onClick={onToggleTerms}
-                  disabled={toggleTerms}
-                >
+                <Button variant="link" onClick={onToggleTerms} disabled={toggleTerms}>
                   T&Cs
                 </Button>
                 <Link href={offer.url} target="_blank" rel="noreferrer">
@@ -114,7 +106,7 @@ const OfferCard = (props: OfferCardProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OfferCard;
+export default OfferCard

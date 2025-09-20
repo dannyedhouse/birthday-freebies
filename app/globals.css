@@ -18,13 +18,139 @@
 
 body {
   height: 100vh;
-  color: rgb(var(--foreground-rgb));
-  background: theme('colors.primary');
-  background-image: url('/bg.png');
+  background-color: #fbf3ef;
   background-repeat: repeat;
   background-size: calc(30%);
 }
 
 p {
   color: black;
+}
+
+/* Dark mode styles */
+.dark body {
+  background-color: #1a1a1a;
+}
+
+.dark p {
+  color: #e5e5e5;
+}
+
+.dark .bg-white {
+  background-color: #2d2d2d;
+}
+
+.dark .text-gray-900 {
+  color: #e5e5e5;
+}
+
+.dark .text-gray-700 {
+  color: #a3a3a3;
+}
+
+.dark .border-gray-200 {
+  border-color: #404040;
+}
+
+.dark .bg-primary {
+  background-color: #374151;
+}
+
+.dark .text-gray-600 {
+  color: #d1d5db;
+}
+
+.dark .text-grey-darkest {
+  color: #1f2937;
+}
+
+.dark .text-gray-900 {
+  color: #f9fafb;
+}
+
+.dark .text-gray-800,
+.dark .text-black {
+  color: #f9fafb;
+}
+
+/* Animation classes for dark mode cake toggle */
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes blowout {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes smoke {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-10px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+}
+
+.animate-flicker {
+  animation: flicker 1s ease-in-out infinite;
+}
+
+.animate-blowout {
+  animation: blowout 0.2s ease-out forwards;
+}
+
+.animate-smoke {
+  animation: smoke 1.5s ease-out infinite;
+}
+
+@keyframes blowout {
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes smoke-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+}
+
+.animate-flicker ellipse {
+  animation: flicker 0.3s infinite alternate;
+  transform-origin: center bottom;
+}
+
+.animate-blowout ellipse {
+  animation: blowout 0.4s forwards;
+}
+
+.animate-smoke circle {
+  animation: smoke-rise 1s ease-out forwards;
 }
