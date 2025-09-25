@@ -2,7 +2,7 @@
 
 import {Offer} from '@/types/OfferInterface'
 import {TopFreebiesSection} from './TopFreebiesSection'
-import {EmailSignupSection} from './EmailSignupSection'
+import SenderEmbed from './SenderEmbed'
 
 interface SidebarProps {
   topOffers?: Offer[]
@@ -13,7 +13,7 @@ export const Sidebar = ({topOffers = []}: SidebarProps) => {
     <aside className="w-full lg:w-80 xl:w-96 flex-shrink-0">
       <div className="sticky top-6 space-y-6">
         <TopFreebiesSection offers={topOffers.slice(0, 3)} />
-        {/* <EmailSignupSection /> */}
+        <SenderEmbed />
         <div className="bg-primary rounded-lg border border-gray-200 p-6 shadow-sm">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">💡 Top tip</h3>
           <p>

@@ -1,7 +1,8 @@
 'use client'
 
 import Dropdown, {DropdownOption} from '@/components/Dropdown/Dropdown'
-import {TagButton} from '@/components/TagButton/TagButton'
+import {TabFilter, FilterType} from '@/components/TabFilter/TabFilter'
+import {SearchField} from '@/components/SearchField/SearchField'
 import {Button} from '@/components/ui/Button'
 import {Sidebar} from '@/components/Sidebar/Sidebar'
 import Image from 'next/image'
@@ -26,21 +27,21 @@ const options: DropdownOption[] = [
 
 const HeroSection = (props: Props) => {
   const [selectedCategory, setSelectedCategory] = useState(options[0])
-  const [selectedTags, setSelectedTags] = useState<string[]>(['freebie', 'discount'])
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const handleTagClick = (selectedTag: string) => {
-    setSelectedTags((prevTags) => {
-      const newTags = prevTags.includes(selectedTag)
-        ? prevTags.filter((t) => t !== selectedTag)
-        : [...prevTags, selectedTag]
+  const handleFilterChange = (filter: FilterType) => {
+    setActiveFilter(filter)
+  }
 
-      return newTags.length === 0 ? ['freebie', 'discount'] : newTags
-    })
+  const handleSearchChange = (term: string) => {
+    setSearchTerm(term)
   }
 
   const resetFilters = () => {
     setSelectedCategory(options[0])
-    setSelectedTags(['freebie', 'discount'])
+    setActiveFilter('all')
+    setSearchTerm('')
   }
 
   const filteredOffers = props.data.filter((offer) => {
@@ -48,33 +49,46 @@ const HeroSection = (props: Props) => {
       selectedCategory.name === 'All categories' ||
       offer.category === selectedCategory.name.toLowerCase()
 
-    const tagMatches = selectedTags.length === 0 || selectedTags.includes(offer.tag)
-    return categoryMatches && tagMatches
+    const tagMatches = activeFilter === 'all' || offer.tag === activeFilter
+
+    const searchMatches =
+      searchTerm === '' ||
+      offer.heading.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      offer.dealSummary.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      offer.retailer.toLowerCase().includes(searchTerm.toLowerCase())
+
+    return categoryMatches && tagMatches && searchMatches
   })
 
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       {/* Main Content */}
       <div className="flex-1 min-w-0">
-        <div className="flex flex-wrap justify-between align-center gap-2 sm:gap-4 mb-2 md:mb-6 w-full">
-          <div className="flex gap-2 sm:gap-4 justify-center w-full md:justify-start md:w-fit">
-            <Dropdown
-              selected={selectedCategory}
-              setSelected={setSelectedCategory}
-              options={options}
-            />
-            <TagButton
-              label={'freebie'}
-              onClick={() => handleTagClick('freebie')}
-              isSelected={selectedTags.includes('freebie')}
-            />
-            <TagButton
-              label={'discount'}
-              onClick={() => handleTagClick('discount')}
-              isSelected={selectedTags.includes('discount')}
-            />
+        <div className="space-y-6 mb-8">
+          {/* Top Row: Category Dropdown, Search, and Results Counter */}
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between align-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center w-full sm:w-auto">
+              <div className="flex-shrink-0 mt-1">
+                <Dropdown
+                  selected={selectedCategory}
+                  setSelected={setSelectedCategory}
+                  options={options}
+                />
+              </div>
+              <div className="flex-2 sm:flex-none mt-1">
+                <SearchField
+                  onSearchChange={handleSearchChange}
+                  placeholder="Search offers, retailers, deals..."
+                />
+              </div>
+            </div>
+            <p className="font-raleway text-sm text-center sm:text-right self-start sm:self-center">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
           </div>
-          <p className="mt-2 font-raleway text-sm sm:text-base text-center w-full md:text-right md:w-auto">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
+
+          {/* Tab Filter Row */}
+          <div className="w-full">
+            <TabFilter onFilterChange={handleFilterChange} initialFilter={activeFilter} />
+          </div>
         </div>
 
         {filteredOffers.length != 0 ? (
@@ -86,9 +100,7 @@ const HeroSection = (props: Props) => {
         ) : (
           <div className="flex items-center w-full justify-between">
             <div>
-              <p className=" bg-primary font-raleway text-2xl h-fit mb-2">
-                <i>No freebies or deals found 💔</i>
-              </p>
+              <p className="font-raleway text-2xl h-fit mb-2">Sorry, no freebies or deals found</p>
               <Button variant="primary" onClick={resetFilters}>
                 Clear all filters
               </Button>
@@ -96,8 +108,8 @@ const HeroSection = (props: Props) => {
             <Image
               priority
               className="hidden md:block justify-self-end"
-              src={'/no-data.webp'}
-              alt="404 image"
+              src={'/no_results.png'}
+              alt="no results found vector image"
               height={650}
               width={450}
             />
