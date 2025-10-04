@@ -1,7 +1,8 @@
 'use client'
 
 import Dropdown, {DropdownOption} from '@/components/Dropdown/Dropdown'
-import {TabFilter, FilterType} from '@/components/TabFilter/TabFilter'
+import {TabFilter} from '@/components/TabFilter/TabFilter'
+import {OfferTags} from '@/types/OfferTags'
 import {SearchField} from '@/components/SearchField/SearchField'
 import {Button} from '@/components/ui/Button'
 import {Sidebar} from '@/components/Sidebar/Sidebar'
@@ -27,10 +28,10 @@ const options: DropdownOption[] = [
 
 const HeroSection = (props: Props) => {
   const [selectedCategory, setSelectedCategory] = useState(options[0])
-  const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const [activeFilter, setActiveFilter] = useState<OfferTags>('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  const handleFilterChange = (filter: FilterType) => {
+  const handleFilterChange = (filter: OfferTags) => {
     setActiveFilter(filter)
   }
 
