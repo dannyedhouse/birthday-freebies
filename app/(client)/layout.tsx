@@ -1,20 +1,28 @@
 import {Footer} from '@/components/Layout/Footer'
 import {Header} from '@/components/Layout/Header'
 import {ScrollToTopButton} from '@/components/ScrollToTop/ScrollToTop'
-import { ThemeProvider } from '@/components/ThemeProvider'
+import {ThemeProvider} from '@/components/ThemeProvider'
+import {Analytics} from '@vercel/analytics/next'
+import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata, Viewport} from 'next'
 import {Raleway} from 'next/font/google'
 import '../globals.css'
 
-const raleway = Raleway({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: '700',
-})
-
 export const metadata: Metadata = {
-  title: 'Birthday Freebie - freebies and discounts',
-  description: 'Birthday freebies and birthday discounts',
+  title: 'Birthday Freebies - Free Birthday Gifts & Discounts',
+  description: 'Discover the best birthday freebies and discounts in the UK! Get free food, drinks, discounts and gifts on your birthday from top brands.',
+  keywords: 'birthday freebies, birthday discounts, free birthday gifts, UK birthday offers, birthday deals',
+  openGraph: {
+    title: 'Birthday Freebies - Free Birthday Gifts & Discounts',
+    description: 'Discover the best birthday freebies and discounts in the UK! Get free food, drinks, discounts and gifts on your birthday from top brands.',
+    type: 'website',
+    siteName: 'Birthday Freebie',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Birthday Freebies - Free Birthday Gifts & Discounts',
+    description: 'Discover the best birthday freebies and discounts in the UK! Get free food, drinks, discounts and gifts on your birthday from top brands.',
+  },
 }
 
 export const viewport: Viewport = {
@@ -43,6 +51,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             <Footer />
           </div>
         </ThemeProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
