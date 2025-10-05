@@ -13,6 +13,7 @@ type SuggestionFormProps = {
 
 export const SuggestionForm: React.FC<SuggestionFormProps> = ({onSubmit}) => {
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const {
     register,
@@ -25,6 +26,7 @@ export const SuggestionForm: React.FC<SuggestionFormProps> = ({onSubmit}) => {
   const submitHandler = async (data: SuggestionFormType) => {
     const transformedData = transformData(data)
     setIsLoading(true)
+    setError(null)
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/submit-suggestion`, {
@@ -34,9 +36,18 @@ export const SuggestionForm: React.FC<SuggestionFormProps> = ({onSubmit}) => {
           'Content-Type': 'application/json',
         },
       })
-    } catch (error) {}
-    setIsLoading(false)
-    onSubmit()
+
+      if (!res.ok) {
+        throw new Error('Failed to submit suggestion. Please try again.')
+      }
+
+      onSubmit()
+    } catch (error) {
+      console.error('Submission error:', error)
+      setError(error instanceof Error ? error.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -65,11 +76,18 @@ export const SuggestionForm: React.FC<SuggestionFormProps> = ({onSubmit}) => {
           errors={errors}
         />
       </div>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+          {error}
+        </div>
+      )}
+
       <div>
         <div className="text-center">
           <button
             type="submit"
-            className="m-auto w-[90%] bg-brand-red hover:scale-105 p-2 rounded text-white font-raleway font-medium flex gap-2 justify-center items-center"
+            className="m-auto w-[90%] bg-brand-red hover:scale-105 p-2 rounded text-white font-raleway font-medium flex gap-2 justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isLoading}
           >
             Submit

@@ -1,0 +1,10 @@
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Block Sanity Studio from being indexed
+Disallow: /studio
+
+# Sitemap location
+Sitemap: https://birthdayfreebie.co.uk/sitemap.xml
+

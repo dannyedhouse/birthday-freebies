@@ -81,6 +81,7 @@ const HeroSection = (props: Props) => {
               </div>
               <div className="flex-1 sm:flex-none">
                 <SearchField
+                  value={searchTerm}
                   onSearchChange={handleSearchChange}
                   placeholder="Search offers, retailers, deals..."
                 />

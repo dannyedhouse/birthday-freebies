@@ -32,7 +32,7 @@ const OfferCard = (props: OfferCardProps) => {
         width={600}
         height={400}
         className="w-full object-center rounded-lg shadow-md bg-white"
-        priority
+        unoptimized={!!offer.image}
       />
       {offer.logo ? (
         <div
@@ -51,7 +51,7 @@ const OfferCard = (props: OfferCardProps) => {
             fill
             sizes={'(max-width: 600px) auto, auto'}
             className="absolute  p-2 bg-white"
-            priority
+            unoptimized
           />
         </div>
       ) : null}

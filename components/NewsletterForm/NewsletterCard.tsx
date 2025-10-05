@@ -8,7 +8,7 @@ interface NewsletterCardProps {
 
 export const NewsletterCard = ({showCloseButton = false, onDismiss}: NewsletterCardProps) => {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm relative">
+    <div className="bg-transparent rounded-lg border border-gray-200 p-6 shadow-sm relative">
       {showCloseButton && onDismiss && (
         <button
           onClick={onDismiss}

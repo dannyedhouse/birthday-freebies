@@ -1,18 +1,24 @@
 'use client'
 
-import {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {FaSearch, FaTimes} from 'react-icons/fa'
 
 interface SearchFieldProps {
   onSearchChange: (searchTerm: string) => void
   placeholder?: string
+  value?: string
 }
 
 export const SearchField = ({
   onSearchChange,
   placeholder = 'Search offers...',
+  value = '',
 }: SearchFieldProps) => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState(value)
+
+  useEffect(() => {
+    setSearchTerm(value)
+  }, [value])
 
   const handleSearchChange = (value: string) => {
     setSearchTerm(value)
