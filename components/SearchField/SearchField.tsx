@@ -35,10 +35,10 @@ export const SearchField = ({
         onChange={(e) => handleSearchChange(e.target.value)}
         placeholder={placeholder}
         className="
-          block w-full pl-10 pr-10 py-2 
-          border border-gray-300 rounded-lg 
+          block w-full h-10 pl-10 pr-10 py-2 
+          rounded-lg border border-gray-200
           bg-white text-gray-900 placeholder-gray-500 text-xs sm:text-sm
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+          focus:outline-none focus:ring-0 focus:border-brand-yellow
           transition-all duration-200 shadow-md
         "
       />

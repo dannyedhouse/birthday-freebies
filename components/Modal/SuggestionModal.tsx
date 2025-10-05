@@ -7,7 +7,7 @@ import {SuggestionForm} from '../SuggestionForm/SuggestionForm'
 import {Button} from '../ui/Button'
 import {Modal} from './Modal'
 
-export const SuggestionModal = () => {
+export const SuggestionModal = ({isMobile = false}: {isMobile?: boolean}) => {
   let [isOpen, setIsOpen] = useState(false)
   const [modalContent, setModalContent] = useState<ReactElement | null>(null)
 
@@ -44,10 +44,12 @@ export const SuggestionModal = () => {
 
   return (
     <>
-      <div>
-        <Button variant="secondary" onClick={openModal}>
+      <div className={isMobile ? 'w-full' : ''}>
+        <Button variant="secondary" onClick={openModal} className={isMobile ? 'w-full justify-center' : ''}>
           <FaRegPenToSquare />
-          <span className="hidden sm:block px-2 font-raleway">Suggest a freebie</span>
+          <span className={isMobile ? 'px-2 font-raleway' : 'hidden sm:block px-2 font-raleway'}>
+            Suggest a freebie
+          </span>
         </Button>
       </div>
       <Modal

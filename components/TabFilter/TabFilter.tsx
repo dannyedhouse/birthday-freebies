@@ -22,18 +22,21 @@ export const TabFilter = ({onFilterChange, initialFilter = 'all'}: TabFilterProp
     {
       id: 'all' as OfferTags,
       label: 'All Deals',
+      mobileLabel: 'All',
       count: null,
       icon: '🎁',
     },
     {
       id: 'freebie' as OfferTags,
       label: 'Freebies',
+      mobileLabel: 'Freebies',
       count: null,
       icon: '🆓',
     },
     {
       id: 'discount' as OfferTags,
       label: 'Discounts',
+      mobileLabel: 'Discounts',
       count: null,
       icon: '💰',
     },
@@ -56,7 +59,8 @@ export const TabFilter = ({onFilterChange, initialFilter = 'all'}: TabFilterProp
             `}
           >
             <span className="text-base">{tab.icon}</span>
-            <span>{tab.label}</span>
+            <span className="hidden sm:inline">{tab.label}</span>
+            <span className="sm:hidden">{tab.mobileLabel}</span>
           </button>
         ))}
       </nav>

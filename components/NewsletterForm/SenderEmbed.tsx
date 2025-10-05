@@ -13,7 +13,7 @@ export default function SenderEmbed() {
   return (
     <>
       <Script src="/sender.js" strategy="afterInteractive" />
-      <div style={{textAlign: 'left'}} className="sender-form-field" data-sender-form-id="aKrGWR" />
+      <div style={{textAlign: 'center'}} className="sender-form-field" data-sender-form-id="aKrGWR" />
     </>
   )
 }

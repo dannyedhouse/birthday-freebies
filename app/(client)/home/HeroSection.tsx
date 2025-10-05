@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Dropdown, {DropdownOption} from '@/components/Dropdown/Dropdown'
 import {TabFilter} from '@/components/TabFilter/TabFilter'
 import {OfferTags} from '@/types/OfferTags'
@@ -15,6 +16,7 @@ import {GiAmpleDress, GiHamburger} from 'react-icons/gi'
 import {MdMore} from 'react-icons/md'
 import OfferCard from '../../../components/OfferCard/OfferCard'
 import {Offer} from '../../../types/OfferInterface'
+import {NewsletterCard} from '@/components/NewsletterForm/NewsletterCard'
 type Props = {data: Offer[]}
 
 const options: DropdownOption[] = [
@@ -30,6 +32,7 @@ const HeroSection = (props: Props) => {
   const [selectedCategory, setSelectedCategory] = useState(options[0])
   const [activeFilter, setActiveFilter] = useState<OfferTags>('all')
   const [searchTerm, setSearchTerm] = useState('')
+  const [isNewsletterDismissed, setIsNewsletterDismissed] = useState(false)
 
   const handleFilterChange = (filter: OfferTags) => {
     setActiveFilter(filter)
@@ -67,23 +70,23 @@ const HeroSection = (props: Props) => {
       <div className="flex-1 min-w-0">
         <div className="space-y-6 mb-8">
           {/* Top Row: Category Dropdown, Search, and Results Counter */}
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between align-center">
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center w-full sm:w-auto">
-              <div className="flex-shrink-0 mt-1">
+          <div className="flex flex-row flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-row items-center gap-3 w-full sm:w-auto">
+              <div className="flex-shrink-0">
                 <Dropdown
                   selected={selectedCategory}
                   setSelected={setSelectedCategory}
                   options={options}
                 />
               </div>
-              <div className="flex-2 sm:flex-none mt-1">
+              <div className="flex-1 sm:flex-none">
                 <SearchField
                   onSearchChange={handleSearchChange}
                   placeholder="Search offers, retailers, deals..."
                 />
               </div>
             </div>
-            <p className="font-raleway text-sm text-center sm:text-right self-start sm:self-center">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
+            <p className="hidden sm:block font-raleway text-sm text-center sm:text-right self-start sm:self-center">{`Showing ${filteredOffers.length} of ${props.data.length} deals`}</p>
           </div>
 
           {/* Tab Filter Row */}
@@ -93,13 +96,20 @@ const HeroSection = (props: Props) => {
         </div>
 
         {filteredOffers.length != 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 pb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-8 pb-12">
             {filteredOffers.map((offer, idx) => (
-              <OfferCard key={idx} data={offer} />
+              <React.Fragment key={idx}>
+                <OfferCard data={offer} />
+                {idx === 5 && !isNewsletterDismissed && (
+                  <div className="lg:hidden col-span-full">
+                    <NewsletterCard showCloseButton onDismiss={() => setIsNewsletterDismissed(true)} />
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         ) : (
-          <div className="flex items-center w-full justify-between">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center w-full justify-between gap-6">
             <div>
               <p className="font-raleway text-2xl h-fit mb-2">Sorry, no freebies or deals found</p>
               <Button variant="primary" onClick={resetFilters}>

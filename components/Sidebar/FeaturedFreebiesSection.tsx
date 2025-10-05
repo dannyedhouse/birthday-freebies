@@ -1,14 +1,14 @@
 import {Offer} from '@/types/OfferInterface'
 import Link from 'next/link'
 
-interface TopFreebiesSectionProps {
+interface FeaturedFreebiesSectionProps {
   offers: Offer[]
 }
 
-export const TopFreebiesSection = ({offers}: TopFreebiesSectionProps) => {
+export const FeaturedFreebiesSection = ({offers}: FeaturedFreebiesSectionProps) => {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">🔥 Top Offers this Week</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">🔥 Featured freebies</h3>
       <ul className="space-y-3">
         {offers.map((offer, index) => (
           <li key={index}>
